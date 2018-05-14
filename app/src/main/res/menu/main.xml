@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/action_nuevo"
+        android:orderInCategory="100"
+        android:title="Agregar"
+        android:icon="@drawable/ic_nuevo"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="Settings"
+        android:icon="@drawable/ic_settings"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_sincro"
+        android:orderInCategory="100"
+        android:title="Sincronizar"
+        android:icon="@drawable/ic_sincro"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_buscar"
+        android:orderInCategory="100"
+        android:title="Buscar"
+        android:icon="@drawable/ic_buscar"
+        app:showAsAction="never" />
+
+
+
+</menu>
