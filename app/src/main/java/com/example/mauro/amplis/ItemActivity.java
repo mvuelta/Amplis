@@ -1,12 +1,19 @@
 package com.example.mauro.amplis;
 
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ItemActivity extends AppCompatActivity {
@@ -16,17 +23,54 @@ public class ItemActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
 
-        final TextView marca = (TextView) findViewById(R.id.textMarca);
-        final TextView modelo = (TextView) findViewById(R.id.textModelo);
-        final TextView potencia = (TextView) findViewById(R.id.textPotencia);
-        final TextView descripcion = (TextView) findViewById(R.id.textDescripcion);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        Bundle parametros = this.getIntent().getExtras();
-        if(parametros !=null){
-            marca.setText("MARCA:\n\n" + parametros.getString("marca"));
-            modelo.setText("MODELO:\n\n" + parametros.getString("modelo"));
-            potencia.setText("POTENCIA\n\n" + parametros.getInt("potencia") + " Watts");
-            descripcion.setText("BREVE DESCRIPCION:\n\n" + parametros.getString("descripcion"));
+        //Establecer el PageAdapter del componente ViewPager
+        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+        //viewPager.setAdapter(new AdaptadorFragmentPager(getSupportFragmentManager()));
+
+        //Tabs
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.appbartabs);
+        tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
+        tabLayout.setupWithViewPager(viewPager);
+
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new EquipoFragment(), "GENERAL");
+        adapter.addFragment(new EquipoFragment(), "Descripcion");
+        adapter.addFragment(new EquipoFragment(), "Codigo");
+        viewPager.setAdapter(adapter);
+    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
         }
     }
+
 }

@@ -22,7 +22,8 @@ public class AddActivity extends AppCompatActivity {
 
     public Button btnInsertar;
 
-    public SQLiteDatabase db;
+    private SQLiteDatabase db;
+    private EquiposSQLiteHelper usdbh;
 
     public Toolbar toolbar;
     @Override
@@ -39,34 +40,39 @@ public class AddActivity extends AppCompatActivity {
         txtDescripcion = (EditText) findViewById(R.id.txtDescripcion);
         btnInsertar = (Button) findViewById(R.id.btnInsertar);
 
+        //Abrimos la base de datos 'DBUsuarios' en modo escritura
+        final EquiposSQLiteHelper usdbh = new EquiposSQLiteHelper(this, "DBEquipos", null, 1);
 
+        db = usdbh.getWritableDatabase();
 
         btnInsertar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-                //Abrimos la base de datos 'DBUsuarios' en modo escritura
-                EquiposSQLiteHelper usdbh = new EquiposSQLiteHelper(AddActivity.this, "DBEquipos", null, 1);
 
-                db = usdbh.getWritableDatabase();
                 //Recuperamos los valores de los campos de texto
                 String mod = txtModelo.getText().toString();
                 String mar = txtMarca.getText().toString();
                 String pot = txtPotencia.getText().toString();
                 String des = txtDescripcion.getText().toString();
-
-                //Alternativa 2: método insert()
-                ContentValues nuevoRegistro = new ContentValues();
-                nuevoRegistro.put("modelo", mod);
-                nuevoRegistro.put("marca", mar);
-                nuevoRegistro.put("potencia", pot);
-                nuevoRegistro.put("descripcion", des);
-                db.insert("Equipos", null, nuevoRegistro);
                 txtMarca.setText("");
                 txtModelo.setText("");
                 txtDescripcion.setText("");
                 txtPotencia.setText("");
 
-                Toast.makeText(AddActivity.this,"Elemento INGRESADO",Toast.LENGTH_LONG).show();
+                String[] campos = new String[]{"id"};
+                Cursor c = db.query("Equipos", campos, null, null, null, null, null);
+                int k = c.getCount();
+                k++;
+                //Alternativa 2: método insert()
+                ContentValues nuevoRegistro = new ContentValues();
+                nuevoRegistro.put("id", k);
+                nuevoRegistro.put("modelo", mod);
+                nuevoRegistro.put("marca", mar);
+                nuevoRegistro.put("imagen", pot);
+                nuevoRegistro.put("descripcion", des);
+                db.insert("Equipos", null, nuevoRegistro);
+
+                Toast.makeText(AddActivity.this,"Elemento INGRESADO -> " + k,Toast.LENGTH_LONG).show();
 
                 // Start the next activity
                 Intent mainIntent = new Intent().setClass(AddActivity.this, MainActivity.class);

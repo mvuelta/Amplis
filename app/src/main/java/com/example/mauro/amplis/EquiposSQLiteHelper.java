@@ -9,7 +9,7 @@ public class EquiposSQLiteHelper extends SQLiteOpenHelper {
 
 
     //Sentencia SQL para crear la tabla de Equipos
-    String sqlCreate = "CREATE TABLE Equipos (modelo TEXT, marca TEXT, potencia INTEGER, descripcion TEXT)";
+    String sqlCreate = "CREATE TABLE Equipos (id TEXT, modelo TEXT, marca TEXT, imagen INTEGER, descripcion TEXT)";
 
     public EquiposSQLiteHelper (Context contexto, String nombre, SQLiteDatabase.CursorFactory factory, int version) {
         super(contexto, nombre, factory, version);

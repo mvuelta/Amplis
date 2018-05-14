@@ -1,9 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ModifyActivity">
+    android:orientation="vertical"
+    tools:context=".ItemActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <EditText
+        android:id="@+id/tMarca"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ingrese la marca"
+        android:background="@android:color/holo_green_dark"
+        android:text="" />
+
+    <EditText
+        android:id="@+id/tModelo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ingrese el modelo"
+        android:background="@android:color/holo_orange_dark"
+        android:text="" />
+
+    <EditText
+        android:id="@+id/tPotencia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ingrese la potencia (en Watts)"
+        android:inputType="number"
+        android:background="@android:color/holo_blue_dark"
+        android:text="" />
+
+    <EditText
+        android:id="@+id/tDescripcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Ingrese una descripcion" />
+
+    <Button
+        android:id="@+id/btnModificar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Modificar" />
+
+</LinearLayout>

@@ -17,32 +17,15 @@
             android:id="@+id/appbar"
             layout="@layout/toolbar" />
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/appbartabs"
+        <TextView
+            android:id="@+id/txtUser"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="50dp"
+            app:layout_constraintStart_toStartOf="@+id/appbar"
+            app:layout_constraintTop_toBottomOf="@+id/LstOpciones" />
+
 
     </android.support.design.widget.AppBarLayout>
-
-    <FrameLayout
-        android:id="@+id/cuadro"
-        android:layout_width="wrap_content"
-        android:layout_height="81dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appbarlayout"
-        app:layout_constraintVertical_bias="0.0">
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewpager"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white" />
-
-    </FrameLayout>
 
     <ListView
         android:id="@+id/LstOpciones"
@@ -54,7 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cuadro"
+        app:layout_constraintTop_toBottomOf="@+id/appbarlayout"
         app:layout_constraintVertical_bias="1.0" />
 
 </android.support.constraint.ConstraintLayout>

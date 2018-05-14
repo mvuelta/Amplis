@@ -1,69 +1,73 @@
 package com.example.mauro.amplis;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-public class AdaptadorEquipos extends ArrayAdapter<Equipos> {
+import java.util.List;
 
-    //Fragment contexto;
+public class AdaptadorEquipos extends BaseAdapter {
+
+    Context contexto;
+    List<Equipos> items;
+    ViewHolder holder;
+
     ////Objeto para reciclar los layout de la lista y los items
     static class ViewHolder {
         TextView marca;
         TextView modelo;
+        ImageView logo;
     }
 
-    public Equipos[] datos;
 
-    //Construcor del adaptador. 1ro el contexto de la activity donde se crea, 2do ID del layout que definimos XML,
-    // 3ro el array de datos
-    public AdaptadorEquipos(Context context, Equipos[] amplisAux) {
-        super(context, R.layout.listitem_equipos, amplisAux);
-        this.datos=amplisAux;
+    public AdaptadorEquipos(Context contexto, List<Equipos> items) {
+        this.contexto = contexto;
+        this.items = items;
     }
 
-/*
-
-    public AdaptadorEquipos(Fragment context, Equipos[] datos) {
-        super(context.getActivity(), R.layout.listitem_equipos, datos);
-        this.datos = datos;
-        this.contexto = context.getParentFragment();
+    @Override
+    public int getCount() {
+        return items.size();    //Retorna la cantidad de elementos de la lista
     }
-*/
 
+    @Override
+    public Object getItem(int position) {
+        return items.get(position); //Retorna el item de la posicion
+    }
 
-    public View getView(int position, View convertView, ViewGroup parent)
-    {
-        View item = convertView;
-        ViewHolder holder;
+    @Override
+    public long getItemId(int position) {
+        return items.get(position).getId(); //Retorna el campo id del item buscado
+    }
 
-        if(item == null)
-        {
-            LayoutInflater inflater = LayoutInflater.from(getContext());
-            //LayoutInflater inflater = context.getLayoutInflater();
-            item = inflater.inflate(R.layout.listitem_equipos, null);
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        View v = convertView;
+
+        if (v == null) {
+            LayoutInflater inflater = LayoutInflater.from(contexto);
+            v = inflater.inflate(R.layout.listitem_equipos,null);
 
             holder = new ViewHolder();
-            holder.modelo = (TextView)item.findViewById(R.id.LblModelo);
-            holder.marca = (TextView)item.findViewById(R.id.LblMarca);
+            holder.modelo = (TextView)v.findViewById(R.id.LblModelo);
+            holder.marca = (TextView)v.findViewById(R.id.LblMarca);
+            holder.logo = (ImageView)v.findViewById(R.id.LblLogo);
 
-            item.setTag(holder);
+            v.setTag(holder);
+
         }
-        else
-        {
-            holder = (ViewHolder)item.getTag();
+        else {
+            holder = (ViewHolder)v.getTag();
         }
 
-        holder.marca.setText(datos[position].getMarca());
-        holder.modelo.setText(datos[position].getModelo());
-
-        return(item);
+        holder.marca.setText(items.get(position).getMarca().toString());
+        holder.modelo.setText(items.get(position).getModelo().toString());
+        holder.logo.setImageResource(items.get(position).getImagen());
+        return v;
     }
+
 }
