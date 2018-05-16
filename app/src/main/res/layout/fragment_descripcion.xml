@@ -10,20 +10,21 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:id="@+id/tModel"
+        android:id="@+id/textoDescripcion"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/tImagen"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="222dp"
+        android:id="@+id/imLogo"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="92dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textoDescripcion" />
 
 
 </android.support.constraint.ConstraintLayout>

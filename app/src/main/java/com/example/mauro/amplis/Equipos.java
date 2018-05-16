@@ -56,17 +56,17 @@ public class Equipos {
     private int id;
     private String marca;
     private String modelo;
-    private int imagen;
+    private int potencia;
     private String descripcion;
 
     public Equipos() {
     }
 
-    public Equipos(int id, String modelo, String marca, int imagen, String descripcion) {
+    public Equipos(int id, String modelo, String marca, int potencia, String descripcion) {
         this.id = id;
         this.marca = marca;
         this.modelo = modelo;
-        this.imagen = imagen;
+        this.potencia = potencia;
         this.descripcion = descripcion;
     }
 
@@ -94,12 +94,12 @@ public class Equipos {
         this.modelo = modelo;
     }
 
-    public int getImagen() {
-        return imagen;
+    public int getPotencia() {
+        return potencia;
     }
 
-    public void setImagen(int imagen) {
-        this.imagen = imagen;
+    public void setPotencia(int potencia) {
+        this.potencia = potencia;
     }
 
     public String getDescripcion() {

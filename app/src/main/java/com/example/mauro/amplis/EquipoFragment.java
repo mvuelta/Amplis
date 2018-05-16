@@ -10,18 +10,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 public class EquipoFragment extends Fragment {
 
-    public TextView modelo;
-    public TextView marca;
-    public TextView potencia;
+    public TextView tModelo;
+    public TextView tMarca;
 
-    public String mod;
-    public String mar;
-    public String pot;
+    private String mod;
+    private String mar;
 
     private SQLiteDatabase db;
     private EquiposSQLiteHelper usdbh;
@@ -47,9 +44,8 @@ public class EquipoFragment extends Fragment {
         super.onActivityCreated(state);
 
 
-        modelo = (TextView) getView().findViewById(R.id.tModel);
-        marca = (TextView) getView().findViewById(R.id.tBrand);
-        potencia = (TextView) getView().findViewById(R.id.tPower);
+        tModelo = (TextView) getView().findViewById(R.id.tModelo);
+        tMarca = (TextView) getView().findViewById(R.id.tBrand);
 
 
         SharedPreferences prefs = this.getActivity().getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
@@ -61,8 +57,7 @@ public class EquipoFragment extends Fragment {
         db = usdbh.getWritableDatabase();
 
         if(db != null) {
-            String[] campos = new String[] {"id", "modelo", "marca", "imagen", "descripcion"};
-            //String[] args = new String[] {Integer.toString(posicion)};
+            String[] campos = new String[] {"modelo", "marca"};
             Cursor c = db.query("Equipos", campos, null, null, null, null, null);
 
             if(c.moveToFirst())
@@ -70,12 +65,8 @@ public class EquipoFragment extends Fragment {
                 int k = 0;
                 do {
                     if (k == posicion) {
-
-                        //amplisAux[0].setId(c.getInt(0));
-                        mod = c.getString(1);
-                        mar = c.getString(2);
-                        pot = c.getString(3);
-
+                        mod = c.getString(0);
+                        mar = c.getString(1);
                     }
                     k++;
                 } while (c.moveToNext());
@@ -84,10 +75,8 @@ public class EquipoFragment extends Fragment {
         }
 
 
-        modelo.setText(mod);
-        marca.setText(mar);
-        potencia.setText(pot);
-
+        tModelo.setText("Modelo: " + mod);
+        tMarca.setText("Marca: "+ mar);
 
     }
 

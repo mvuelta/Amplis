@@ -15,11 +15,13 @@ import android.widget.TextView;
 
 public class DescripcionFragment extends Fragment {
 
-    public TextView descripcion;
-    public ImageView imagen;
+    private TextView descripcion;
+    private ImageView imagen;
 
     private SQLiteDatabase db;
     private EquiposSQLiteHelper usdbh;
+
+    Equipos amplisAux;
 
     public static DescripcionFragment newInstance() {
         DescripcionFragment fragment = new DescripcionFragment();
@@ -41,11 +43,9 @@ public class DescripcionFragment extends Fragment {
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
 
-
-        Equipos amplisAux;
         amplisAux = new Equipos();
-        descripcion = (TextView) getView().findViewById(R.id.tDescripcion);
-        imagen = (ImageView) getView().findViewById(R.id.tImagen);
+        descripcion = (TextView) getView().findViewById(R.id.textoDescripcion);
+        imagen = (ImageView) getView().findViewById(R.id.imLogo);
         //potencia = (TextView) getView().findViewById(R.id.tPower);
 
         SharedPreferences prefs = this.getActivity().getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
@@ -58,7 +58,6 @@ public class DescripcionFragment extends Fragment {
 
         if(db != null) {
             String[] campos = new String[] {"id", "imagen", "descripcion"};
-            //String[] args = new String[] {Integer.toString(posicion)};
             Cursor c = db.query("Equipos", campos, null, null, null, null, null);
 
             if(c.moveToFirst())
@@ -67,7 +66,7 @@ public class DescripcionFragment extends Fragment {
                 do {
                     if (k == posicion) {
                         amplisAux.setId(c.getInt(0));
-                        amplisAux.setImagen(c.getInt(1));
+                        amplisAux.setPotencia(c.getInt(1));
                         amplisAux.setDescripcion(c.getString(2));
                     }
                     k++;
@@ -76,17 +75,8 @@ public class DescripcionFragment extends Fragment {
 
         }
 
-        descripcion.setText(amplisAux.getDescripcion());
-        imagen.setImageResource(amplisAux.getImagen());
-
-
-  /*      if (c.moveToFirst())
-        {
-            do {
-
-                db.delete("Equipos", "id=" + args, null);
-            } while (c.moveToNext());
-        }*/
+        descripcion.setText(amplisAux.getDescripcion().toString());
+        imagen.setImageResource(amplisAux.getPotencia());
 
     }
 

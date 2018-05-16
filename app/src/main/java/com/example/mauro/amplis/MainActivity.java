@@ -22,6 +22,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     //int i;
 
     public TextView user;
+    private Spinner cmbOpciones;
     public ListView lstOpciones;
     public Toolbar toolbar;
     AdaptadorEquipos adaptador;
@@ -44,25 +46,25 @@ public class MainActivity extends AppCompatActivity {
     private Equipos amplisAux;
     private Equipos[] amplis =
             new Equipos[]{
-                    new Equipos(1,"DELUXE REVERB 65", "Fender", R.mipmap.ic_fender, "De la linea Vintage Reissu, es un amplificador valvular."),
-                    new Equipos(2, "40", "Fender", R.mipmap.ic_fender, "Equipo de guitarra de la linea Champion.\n" +
+                    new Equipos(1,"DELUXE REVERB 65", "Fender", 65, "De la linea Vintage Reissu, es un amplificador valvular."),
+                    new Equipos(2, "40", "Fender", 40, "Equipo de guitarra de la linea Champion.\n" +
                             "Peso: 8.6 kg"),
-                    new Equipos(3,"VT40X", "VOX", R.mipmap.ic_vox, "- Modelado de Amps\n" +
+                    new Equipos(3,"VT40X", "VOX", 40, "- Modelado de Amps\n" +
                             "- Efectos Programables\n" +
                             "- Pre valvular\n" +
                             "- USB"),
-                    new Equipos(4,"AC15C1", "Vox", R.mipmap.ic_vox, "Linea Custom\n" +
+                    new Equipos(4,"AC15C1", "Vox", 15, "Linea Custom\n" +
                             "Válvulas 3 x ECC83/12AX7 en previo, 2 x EL84 en etapa\n" +
                             "Panel de control: Input Normal, Top Boost, Volume, Treble, Bass, Reverb, Tremolo\n" +
                             "Peso: 22 kg"),
-                    new Equipos(5, "V845", "Vox", R.mipmap.ic_peavey, "Pedal de efecto Wah-Wah. Analogico."),
-                    new Equipos(6,"A5040100", "Marshall", R.mipmap.ic_fender, "Cabezal de guitarra valvular\n" +
+                    new Equipos(5, "V845", "Vox", 80, "Pedal de efecto Wah-Wah. Analogico."),
+                    new Equipos(6,"A5040100", "Marshall", 50, "Cabezal de guitarra valvular\n" +
                             "Válvulas: 4x ECC83 y 4x EL34\n" +
                             "2 canales: Classic Gain y Ultra Gain\n" +
                             "Peso: 24,2 kg"),
-                    new Equipos(7, "Título 7", "Prueba 7", R.mipmap.ic_fender, "Prueba6"),
-                    new Equipos(8, "Título 8", "Prueba 8", R.mipmap.ic_fender, "Prueba7"),
-                    new Equipos(9,"Título 9", "Prueba 9", R.mipmap.ic_fender, "Prueba8")};
+                    new Equipos(7, "Título 7", "Prueba 7", 100, "Prueba6"),
+                    new Equipos(8, "Título 8", "Prueba 8",  150, "Prueba7"),
+                    new Equipos(9,"Título 9", "Prueba 9", 20, "Prueba8")};
 
 
 
@@ -81,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
         //Appbar
         toolbar = (Toolbar) findViewById(R.id.appbar);
         setSupportActionBar(toolbar);
+
 
         //Registro la ListView en el Context Menu
         registerForContextMenu(lstOpciones);
@@ -101,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
         /*---Alternativa lista dinamica---*/
         if(db != null) { //Si existe base de datos
             //Ingreso la tabla Equipos de la BD en el ListView
-            String[] campos = new String[]{"id", "modelo", "marca", "imagen", "descripcion"};
+            String[] campos = new String[]{"id", "modelo", "marca", "potencia", "descripcion"};
             Cursor c = db.query("Equipos", campos, null, null, null, null, null);
             if (c.moveToFirst()) { //Muestro la BD en la ListView. Sino hay datos cargo el vector definido.
                 //Recorremos el cursor hasta que no haya más registros
@@ -111,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                     amplisAux.setId(c.getInt(0));
                     amplisAux.setModelo(c.getString(1));
                     amplisAux.setMarca(c.getString(2));
-                    amplisAux.setImagen(c.getInt(3));
+                    amplisAux.setPotencia(c.getInt(3));
                     amplisAux.setDescripcion(c.getString(4));
 
                     lista.add(amplisAux);
@@ -119,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //c.close();
             }
-            flag = false;
+            //flag = false;
             //Constructor del adaptador, paso contexto (actividad desde la que se crea el adaptador) y el array a mostrar
             adaptador = new AdaptadorEquipos(getApplicationContext(), lista);
             lstOpciones.setAdapter(adaptador);
@@ -127,17 +130,17 @@ public class MainActivity extends AppCompatActivity {
 
         else { //Sino existe la base de datos, cargo un vector definido para mostrar
             int i;
-            if (flag) { //Entro si la BD esta vacia
+            /*if (flag)*/ { //Entro si la BD esta vacia
                 ContentValues nuevoRegistro = new ContentValues();
                 for (i = 0; i < 9; i++) {
                     nuevoRegistro.put("id", amplis[i].getId());
                     nuevoRegistro.put("marca", amplis[i].getMarca());
                     nuevoRegistro.put("modelo", amplis[i].getModelo());
-                    nuevoRegistro.put("imagen", amplis[i].getImagen());
+                    nuevoRegistro.put("potencia", amplis[i].getPotencia());
                     nuevoRegistro.put("descripcion", amplis[i].getDescripcion());
                     db.insert("Equipos", null, nuevoRegistro);
                 }
-                String[] campos = new String[]{"id", "modelo", "marca", "imagen", "descripcion"};
+                String[] campos = new String[]{"id", "modelo", "marca", "potencia", "descripcion"};
                 Cursor c = db.query("Equipos", campos, null, null, null, null, null);
                 if (c.moveToFirst()) { //Muestro la BD en la ListView. Sino hay datos cargo el vector definido.
                     //Recorremos el cursor hasta que no haya más registros
@@ -146,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                         amplisAux.setId(c.getInt(0));
                         amplisAux.setModelo(c.getString(1));
                         amplisAux.setMarca(c.getString(2));
-                        amplisAux.setImagen(c.getInt(3));
+                        amplisAux.setPotencia(c.getInt(3));
                         amplisAux.setDescripcion(c.getString(4));
 
                         lista.add(amplisAux);
@@ -299,7 +302,7 @@ public class MainActivity extends AppCompatActivity {
         if(item.getTitle()=="Eliminar"){
 
             if (db != null) {
-                String[] campos = new String[] {"id", "modelo","marca","imagen","descripcion"};
+                String[] campos = new String[] {"id", "modelo","marca","potencia","descripcion"};
                 Cursor c = db.query("Equipos", campos, null, null, null, null, null);
 
                 if (c.moveToFirst()) {

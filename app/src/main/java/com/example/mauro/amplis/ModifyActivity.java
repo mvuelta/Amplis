@@ -13,14 +13,14 @@ import android.widget.Toast;
 
 public class ModifyActivity extends AppCompatActivity {
 
-    public EditText txtMarca;
-    public EditText txtModelo;
-    public EditText txtPotencia;
-    public EditText txtDescripcion;
+    private EditText txtMarca;
+    private EditText txtModelo;
+    private EditText txtPotencia;
+    private EditText txtDescripcion;
 
     public Button btnModificar;
 
-    public boolean flag;
+    //public boolean flag;
 
     private SQLiteDatabase db;
     private EquiposSQLiteHelper usdbh;
@@ -30,10 +30,10 @@ public class ModifyActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_modify);
 
-        txtMarca = (EditText) findViewById(R.id.tMarca);
-        txtModelo = (EditText) findViewById(R.id.tModelo);
-        txtPotencia = (EditText) findViewById(R.id.tPotencia);
-        txtDescripcion = (EditText) findViewById(R.id.tDescripcion);
+        txtMarca = (EditText) findViewById(R.id.eMarca);
+        txtModelo = (EditText) findViewById(R.id.eModelo);
+        txtPotencia = (EditText) findViewById(R.id.ePotencia);
+        txtDescripcion = (EditText) findViewById(R.id.eDescripcion);
         btnModificar = (Button) findViewById(R.id.btnModificar);
 
         //Abrimos la base de datos 'DBUsuarios' en modo escritura

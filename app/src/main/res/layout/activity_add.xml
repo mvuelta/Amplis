@@ -6,29 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".AddActivity">
 
-    <include
-        android:id="@+id/appbar"
-        layout="@layout/toolbar" />
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/editMarca"
-        android:layout_width="0dp"
+        <include
+            android:id="@+id/appbar"
+            layout="@layout/toolbar" />
+
+        <Spinner
+            android:id="@+id/CmbOpciones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <TextView
+        android:id="@+id/txtMarca"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="30dp"
+        android:hint="Ingrese la marca mediante el menu"
+        android:text=""
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appbar">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/txtMarca"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Ingrese la marca"
-            android:text="" />
-    </android.support.design.widget.TextInputLayout>
+        app:layout_constraintTop_toBottomOf="@+id/appbarlayout" />
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/editModelo"
@@ -39,33 +48,13 @@
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editMarca">
+        app:layout_constraintTop_toBottomOf="@+id/txtMarca">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/txtModelo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Ingrese el modelo"
-            android:text="" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/editPotencia"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editModelo">
-
-        <android.support.design.widget.TextInputEditText
-            android:id="@+id/txtPotencia"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Ingrese la potencia (en Watts)"
-            android:inputType="number"
             android:text="" />
     </android.support.design.widget.TextInputLayout>
 
@@ -80,6 +69,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <EditText
+        android:id="@+id/editPotencia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:hint="Ingrese la potencia (Watts)"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editModelo"/>
+
     <android.support.design.widget.TextInputLayout
         android:id="@+id/editDescripcion"
         android:layout_width="0dp"
@@ -88,10 +89,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/editPotencia"
         app:layout_constraintBottom_toTopOf="@+id/btnInsertar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editPotencia">
+        app:layout_constraintStart_toStartOf="parent">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/txtDescripcion"

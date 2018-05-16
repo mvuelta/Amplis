@@ -66,7 +66,8 @@ public class AdaptadorEquipos extends BaseAdapter {
 
         holder.marca.setText(items.get(position).getMarca().toString());
         holder.modelo.setText(items.get(position).getModelo().toString());
-        holder.logo.setImageResource(items.get(position).getImagen());
+
+        //holder.logo.setImageResource(items.get(position).getImagen());
         return v;
     }
 

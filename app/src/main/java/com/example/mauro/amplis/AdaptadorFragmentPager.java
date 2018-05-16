@@ -16,38 +16,21 @@ public class AdaptadorFragmentPager extends FragmentPagerAdapter{
    // private String tabTitles[] = new String[] { "Equipo", "Descripcion", "Codigo interno"};
 
     public AdaptadorFragmentPager(FragmentManager fm) {
+
         super(fm);
     }
 
     @Override
     public int getCount() {
-        return PAGE_COUNT;
-        //return mFragmentList.size();
+        return mFragmentList.size();
     }
 
     @Override
     public Fragment getItem(int position) {
 //oliver
-
-        Fragment f = null;
-
-        switch(position) {
-            case 0:
-                f = EquipoFragment.newInstance();
-                break;
-            case 1:
-                f = DescripcionFragment.newInstance();
-                break;
-            case 2:
-                f = CodigoFragment.newInstance();
-                break;
-        }
-
-        return f;
-
+        return mFragmentList.get(position);
     }
 
-/*
     public void addFragment(Fragment fragment, String title) {
         mFragmentList.add(fragment);
         mFragmentTitleList.add(title);
@@ -59,6 +42,5 @@ public class AdaptadorFragmentPager extends FragmentPagerAdapter{
         //return tabTitles[position];
         return mFragmentTitleList.get(position);
     }
-*/
 
 }

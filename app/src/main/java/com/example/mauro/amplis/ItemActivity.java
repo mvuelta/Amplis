@@ -28,7 +28,6 @@ public class ItemActivity extends AppCompatActivity {
         //Establecer el PageAdapter del componente ViewPager
         ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
-        //viewPager.setAdapter(new AdaptadorFragmentPager(getSupportFragmentManager()));
 
         //Tabs
         TabLayout tabLayout = (TabLayout) findViewById(R.id.appbartabs);
@@ -38,10 +37,10 @@ public class ItemActivity extends AppCompatActivity {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        AdaptadorFragmentPager adapter = new AdaptadorFragmentPager(getSupportFragmentManager());
         adapter.addFragment(new EquipoFragment(), "GENERAL");
-        adapter.addFragment(new EquipoFragment(), "Descripcion");
-        adapter.addFragment(new EquipoFragment(), "Codigo");
+        adapter.addFragment(new DescripcionFragment(), "Descripcion");
+        adapter.addFragment(new CodigoFragment(), "Codigo");
         viewPager.setAdapter(adapter);
     }
 

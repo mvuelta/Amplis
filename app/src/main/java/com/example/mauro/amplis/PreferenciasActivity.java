@@ -17,9 +17,7 @@ public class PreferenciasActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        getFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new PreferenciasFragment())
-                .commit();
+        getFragmentManager().beginTransaction().replace(android.R.id.content, new PreferenciasFragment()).commit();
 /*
 
         Toolbar tool = findViewById(R.id.appbar);
