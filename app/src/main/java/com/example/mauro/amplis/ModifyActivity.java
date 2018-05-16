@@ -64,7 +64,7 @@ public class ModifyActivity extends AppCompatActivity {
                 //////////////////////////////////////////
 
                 if (db != null) {
-                    String[] campos = new String[] {"id", "modelo", "marca","imagen", "descripcion"};
+                    String[] campos = new String[] {"id", "modelo", "marca","potencia", "descripcion"};
                     Cursor c = db.query("Equipos", campos, null, null, null, null, null);
 
 
@@ -78,7 +78,7 @@ public class ModifyActivity extends AppCompatActivity {
                                 ContentValues nuevoRegistro = new ContentValues();
                                 nuevoRegistro.put("modelo", mod);
                                 nuevoRegistro.put("marca", mar);
-                                nuevoRegistro.put("imagen", pot);
+                                nuevoRegistro.put("potencia", pot);
                                 nuevoRegistro.put("descripcion", des);
                                 i++;
                                 db.update("Equipos", nuevoRegistro, "id=" + i, null);

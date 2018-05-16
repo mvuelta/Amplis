@@ -16,7 +16,7 @@ import android.widget.TextView;
 public class DescripcionFragment extends Fragment {
 
     private TextView descripcion;
-    private ImageView imagen;
+    private TextView potencia;
 
     private SQLiteDatabase db;
     private EquiposSQLiteHelper usdbh;
@@ -45,8 +45,7 @@ public class DescripcionFragment extends Fragment {
 
         amplisAux = new Equipos();
         descripcion = (TextView) getView().findViewById(R.id.textoDescripcion);
-        imagen = (ImageView) getView().findViewById(R.id.imLogo);
-        //potencia = (TextView) getView().findViewById(R.id.tPower);
+        potencia = (TextView) getView().findViewById(R.id.textoPotencia);
 
         SharedPreferences prefs = this.getActivity().getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
         int posicion = prefs.getInt("posicion", -1);
@@ -57,7 +56,7 @@ public class DescripcionFragment extends Fragment {
         db = usdbh.getWritableDatabase();
 
         if(db != null) {
-            String[] campos = new String[] {"id", "descripcion"};
+            String[] campos = new String[] {"id","potencia", "descripcion"};
             Cursor c = db.query("Equipos", campos, null, null, null, null, null);
 
             if(c.moveToFirst())
@@ -66,8 +65,8 @@ public class DescripcionFragment extends Fragment {
                 do {
                     if (k == posicion) {
                         amplisAux.setId(c.getInt(0));
-                        //amplisAux.setPotencia(c.getInt(1));
-                        amplisAux.setDescripcion(c.getString(1));
+                        amplisAux.setPotencia(c.getInt(1));
+                        amplisAux.setDescripcion(c.getString(2));
                     }
                     k++;
                 } while (c.moveToNext());
@@ -75,8 +74,8 @@ public class DescripcionFragment extends Fragment {
 
         }
 
-        descripcion.setText(amplisAux.getDescripcion().toString());
-        //imagen.setImageResource(amplisAux.getPotencia());
+        descripcion.setText("Descripcion:\n\n" + amplisAux.getDescripcion());
+        potencia.setText("Potencia = " + amplisAux.getPotencia() + " Watts");
 
     }
 

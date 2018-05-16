@@ -67,7 +67,23 @@ public class AdaptadorEquipos extends BaseAdapter {
         holder.marca.setText(items.get(position).getMarca().toString());
         holder.modelo.setText(items.get(position).getModelo().toString());
 
-        //holder.logo.setImageResource(items.get(position).getImagen());
+
+        switch (items.get(position).getMarca().toString().toLowerCase()) {
+            case "fender":
+                holder.logo.setImageResource(R.mipmap.ic_fender);
+                break;
+            case "marshall":
+                holder.logo.setImageResource(R.mipmap.ic_marshall);
+                break;
+            case "vox":
+                holder.logo.setImageResource(R.mipmap.ic_vox);
+                break;
+            case "peavey":
+                holder.logo.setImageResource(R.mipmap.ic_peavey);
+                break;
+            default: holder.logo.setImageResource(R.mipmap.ic_marshall);
+        }
+
         return v;
     }
 

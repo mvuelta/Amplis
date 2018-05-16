@@ -22,6 +22,7 @@ public class AdaptadorFragmentPager extends FragmentPagerAdapter{
 
     @Override
     public int getCount() {
+
         return mFragmentList.size();
     }
 

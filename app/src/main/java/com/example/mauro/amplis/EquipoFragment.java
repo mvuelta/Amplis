@@ -9,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
@@ -16,6 +17,7 @@ public class EquipoFragment extends Fragment {
 
     public TextView tModelo;
     public TextView tMarca;
+    public ImageView iLogo;
 
     private String mod;
     private String mar;
@@ -46,6 +48,7 @@ public class EquipoFragment extends Fragment {
 
         tModelo = (TextView) getView().findViewById(R.id.tModelo);
         tMarca = (TextView) getView().findViewById(R.id.tBrand);
+        iLogo = (ImageView) getView().findViewById(R.id.iLogo);
 
 
         SharedPreferences prefs = this.getActivity().getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
@@ -59,14 +62,13 @@ public class EquipoFragment extends Fragment {
         if(db != null) {
             String[] campos = new String[] {"modelo", "marca"};
             Cursor c = db.query("Equipos", campos, null, null, null, null, null);
-
             if(c.moveToFirst())
             {
                 int k = 0;
                 do {
                     if (k == posicion) {
-                        mod = c.getString(0);
-                        mar = c.getString(1);
+                        mod = c.getString(0).toString();
+                        mar = c.getString(1).toString();
                     }
                     k++;
                 } while (c.moveToNext());
@@ -77,6 +79,24 @@ public class EquipoFragment extends Fragment {
 
         tModelo.setText("Modelo: " + mod);
         tMarca.setText("Marca: "+ mar);
+
+        switch (mar.toLowerCase().toString()) {
+            case "fender":
+                iLogo.setImageResource(R.mipmap.ic_fender);
+                break;
+            case "marshall":
+                iLogo.setImageResource(R.mipmap.ic_marshall);
+                break;
+            case "vox":
+                iLogo.setImageResource(R.mipmap.ic_vox);
+                break;
+            case "peavey":
+                iLogo.setImageResource(R.mipmap.ic_peavey);
+                break;
+                default: iLogo.setImageResource(R.mipmap.ic_marshall);
+        }
+
+
 
     }
 

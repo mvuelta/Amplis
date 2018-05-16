@@ -99,10 +99,9 @@ public class MainActivity extends AppCompatActivity {
         user.setText("Usuario: " + usuario);
 
         /*---------------------------------------------------------*/
-
         //INGRESO
-        /*---Alternativa lista dinamica---*/
-        if(db != null) { //Si existe base de datos
+        //---Alternativa lista dinamica---
+        if(db != null) { /*********Solo si existe base de datos*********/
             //Ingreso la tabla Equipos de la BD en el ListView
             String[] campos = new String[]{"id", "modelo", "marca", "potencia", "descripcion"};
             Cursor c = db.query("Equipos", campos, null, null, null, null, null);
@@ -128,9 +127,9 @@ public class MainActivity extends AppCompatActivity {
             lstOpciones.setAdapter(adaptador);
         }
 
-        else { //Sino existe la base de datos, cargo un vector definido para mostrar
+        else { /**********Sino existe la base de datos, cargo un vector definido para mostrar******************/
             int i;
-            /*if (flag)*/ { //Entro si la BD esta vacia
+            if (flag) { //Entro si la BD esta vacia
                 ContentValues nuevoRegistro = new ContentValues();
                 for (i = 0; i < 9; i++) {
                     nuevoRegistro.put("id", amplis[i].getId());

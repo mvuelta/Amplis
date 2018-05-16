@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 public class AddActivity extends AppCompatActivity {
 
-    private TextView txtMarca;
+    private EditText txtMarca;
     private EditText txtModelo;
     private EditText txtPotencia;
     private EditText txtDescripcion;
@@ -50,7 +50,7 @@ public class AddActivity extends AppCompatActivity {
         //adapter.setDropDownViewTheme(R.);
         cmbOpciones.setAdapter(adapter);
 
-        txtMarca = (TextView) findViewById(R.id.txtMarca);
+        txtMarca = (EditText) findViewById(R.id.txtMarca);
         txtModelo = (EditText) findViewById(R.id.txtModelo);
         txtPotencia = (EditText)findViewById(R.id.editPotencia);
         txtDescripcion = (EditText) findViewById(R.id.txtDescripcion);
@@ -77,18 +77,29 @@ public class AddActivity extends AppCompatActivity {
 
                 String[] campos = new String[]{"id"};
                 Cursor c = db.query("Equipos", campos, null, null, null, null, null);
-                int k = c.getCount();
-                k++;
+                //int k = c.getCount();
+                //k++;
                 //Alternativa 2: método insert()
+                int i = 0;
                 ContentValues nuevoRegistro = new ContentValues();
-                nuevoRegistro.put("id", k);
+                if (c.moveToFirst()) {
+                    //Recorremos el cursor hasta que no haya más registros
+                    do {
+                        if (i != c.getInt(0)) {
+                            nuevoRegistro.put("id", i);
+                            break;
+                        }
+                        i++;
+                    } while (c.moveToNext());
+
+                }
                 nuevoRegistro.put("modelo", mod);
                 nuevoRegistro.put("marca", mar);
                 nuevoRegistro.put("potencia", pot);
                 nuevoRegistro.put("descripcion", des);
                 db.insert("Equipos", null, nuevoRegistro);
 
-                Toast.makeText(AddActivity.this,"Elemento INGRESADO -> " + k,Toast.LENGTH_LONG).show();
+                Toast.makeText(AddActivity.this,"Elemento INGRESADO -> " + i,Toast.LENGTH_LONG).show();
 
                 // Start the next activity
                 Intent mainIntent = new Intent().setClass(AddActivity.this, MainActivity.class);
