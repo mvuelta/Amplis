@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="valores_array">
+        <item>Fender</item>
+        <item>Marshall</item>
+        <item>Vox</item>
+        <item>Peavey</item>
+        <item>Generico</item>
+    </string-array>
+</resources>
