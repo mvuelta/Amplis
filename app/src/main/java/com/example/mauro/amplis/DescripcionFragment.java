@@ -57,7 +57,7 @@ public class DescripcionFragment extends Fragment {
         db = usdbh.getWritableDatabase();
 
         if(db != null) {
-            String[] campos = new String[] {"id", "imagen", "descripcion"};
+            String[] campos = new String[] {"id", "descripcion"};
             Cursor c = db.query("Equipos", campos, null, null, null, null, null);
 
             if(c.moveToFirst())
@@ -66,8 +66,8 @@ public class DescripcionFragment extends Fragment {
                 do {
                     if (k == posicion) {
                         amplisAux.setId(c.getInt(0));
-                        amplisAux.setPotencia(c.getInt(1));
-                        amplisAux.setDescripcion(c.getString(2));
+                        //amplisAux.setPotencia(c.getInt(1));
+                        amplisAux.setDescripcion(c.getString(1));
                     }
                     k++;
                 } while (c.moveToNext());
@@ -76,7 +76,7 @@ public class DescripcionFragment extends Fragment {
         }
 
         descripcion.setText(amplisAux.getDescripcion().toString());
-        imagen.setImageResource(amplisAux.getPotencia());
+        //imagen.setImageResource(amplisAux.getPotencia());
 
     }
 

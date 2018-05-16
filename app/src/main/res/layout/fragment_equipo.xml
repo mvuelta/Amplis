@@ -25,5 +25,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tModelo" />
 
+    <TextView
+        android:id="@+id/tPower"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tBrand" />
+
 
 </android.support.constraint.ConstraintLayout>
