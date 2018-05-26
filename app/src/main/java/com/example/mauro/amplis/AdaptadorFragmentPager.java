@@ -12,8 +12,6 @@ public class AdaptadorFragmentPager extends FragmentPagerAdapter{
     private final List<Fragment> mFragmentList = new ArrayList<>();
     private final List<String> mFragmentTitleList = new ArrayList<>();
 
-    final int PAGE_COUNT = 3; //Cantidad de tabs
-   // private String tabTitles[] = new String[] { "Equipo", "Descripcion", "Codigo interno"};
 
     public AdaptadorFragmentPager(FragmentManager fm) {
 
@@ -28,7 +26,6 @@ public class AdaptadorFragmentPager extends FragmentPagerAdapter{
 
     @Override
     public Fragment getItem(int position) {
-//oliver
         return mFragmentList.get(position);
     }
 
@@ -40,7 +37,6 @@ public class AdaptadorFragmentPager extends FragmentPagerAdapter{
     @Override
     public CharSequence getPageTitle(int position) {
         // Generate title based on item position
-        //return tabTitles[position];
         return mFragmentTitleList.get(position);
     }
 

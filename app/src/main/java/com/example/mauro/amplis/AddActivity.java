@@ -1,7 +1,9 @@
 package com.example.mauro.amplis;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.design.widget.TextInputLayout;
@@ -19,7 +21,7 @@ import android.widget.Toast;
 
 public class AddActivity extends AppCompatActivity {
 
-    private EditText txtMarca;
+    private TextView txtMarca;
     private EditText txtModelo;
     private EditText txtPotencia;
     private EditText txtDescripcion;
@@ -45,12 +47,12 @@ public class AddActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         Spinner cmbOpciones = (Spinner) findViewById(R.id.CmbOpciones);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.valores_array, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.valores_array,
+                android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //adapter.setDropDownViewTheme(R.);
         cmbOpciones.setAdapter(adapter);
 
-        txtMarca = (EditText) findViewById(R.id.txtMarca);
+        txtMarca = (TextView) findViewById(R.id.txtMarca);
         txtModelo = (EditText) findViewById(R.id.txtModelo);
         txtPotencia = (EditText)findViewById(R.id.editPotencia);
         txtDescripcion = (EditText) findViewById(R.id.txtDescripcion);
@@ -63,8 +65,6 @@ public class AddActivity extends AppCompatActivity {
 
         btnInsertar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-
                 //Recuperamos los valores de los campos de texto
                 mod = txtModelo.getText().toString();
                 mar = txtMarca.getText().toString();
@@ -75,36 +75,22 @@ public class AddActivity extends AppCompatActivity {
                 txtPotencia.setText("");
                 txtDescripcion.setText("");
 
-                String[] campos = new String[]{"id"};
-                Cursor c = db.query("Equipos", campos, null, null, null, null, null);
-                //int k = c.getCount();
-                //k++;
-                //Alternativa 2: método insert()
-                int i = 0;
-                ContentValues nuevoRegistro = new ContentValues();
-                if (c.moveToFirst()) {
-                    //Recorremos el cursor hasta que no haya más registros
-                    do {
-                        if (i != c.getInt(0)) {
-                            nuevoRegistro.put("id", i);
-                            break;
-                        }
-                        i++;
-                    } while (c.moveToNext());
+                final SharedPreferences pref = getSharedPreferences("Codigo Libre", Context.MODE_PRIVATE);
 
-                }
+                int nuevo = pref.getInt("libre", 1);
+
+                //Alternativa 2: método insert()
+                ContentValues nuevoRegistro = new ContentValues();
+                nuevoRegistro.put("id", nuevo);     //Ingreso el id del ultimo elemento mas uno
                 nuevoRegistro.put("modelo", mod);
                 nuevoRegistro.put("marca", mar);
                 nuevoRegistro.put("potencia", pot);
                 nuevoRegistro.put("descripcion", des);
                 db.insert("Equipos", null, nuevoRegistro);
-
-                Toast.makeText(AddActivity.this,"Elemento INGRESADO -> " + i,Toast.LENGTH_LONG).show();
-
+                Toast.makeText(AddActivity.this,"Elemento INGRESADO -> " + nuevo,Toast.LENGTH_LONG).show();
                 // Start the next activity
                 Intent mainIntent = new Intent().setClass(AddActivity.this, MainActivity.class);
                 startActivity(mainIntent);
-
                 finish();
             }
         });
@@ -114,24 +100,6 @@ public class AddActivity extends AppCompatActivity {
                 new AdapterView.OnItemSelectedListener() {
                     public void onItemSelected(AdapterView<?> parent, android.view.View v, int position, long id) {
                         txtMarca.setText(parent.getItemAtPosition(position).toString());
-               /*         switch(parent.getItemAtPosition(position).toString()) {
-                            case "Fender":
-                                im = R.mipmap.ic_fender;
-                                break;
-                            case "Marshall":
-                                im = R.mipmap.ic_fender;
-                                break;
-                            case "Vox":
-                                im = R.mipmap.ic_vox;
-                                break;
-                            case "Peavey":
-                                im = R.mipmap.ic_peavey;
-                                break;
-                            case "Generico":
-                                im = R.mipmap.ic_welcome;
-                                break;
-                                default: im = R.drawable.ic_nota;
-                        }*/
                     }
 
                     public void onNothingSelected(AdapterView<?> parent) {

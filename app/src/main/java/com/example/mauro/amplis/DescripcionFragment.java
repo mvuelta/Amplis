@@ -66,7 +66,7 @@ public class DescripcionFragment extends Fragment {
                     if (k == posicion) {
                         amplisAux.setId(c.getInt(0));
                         amplisAux.setPotencia(c.getInt(1));
-                        amplisAux.setDescripcion(c.getString(2));
+                        amplisAux.setDescripcion(c.getString(2).toString());
                     }
                     k++;
                 } while (c.moveToNext());

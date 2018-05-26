@@ -81,7 +81,7 @@ public class AdaptadorEquipos extends BaseAdapter {
             case "peavey":
                 holder.logo.setImageResource(R.mipmap.ic_peavey);
                 break;
-            default: holder.logo.setImageResource(R.mipmap.ic_marshall);
+            default: holder.logo.setImageResource(R.mipmap.ic_marshallito);
         }
 
         return v;

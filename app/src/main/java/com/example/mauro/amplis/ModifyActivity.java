@@ -17,13 +17,9 @@ public class ModifyActivity extends AppCompatActivity {
     private EditText txtModelo;
     private EditText txtPotencia;
     private EditText txtDescripcion;
-
     public Button btnModificar;
 
-    //public boolean flag;
-
     private SQLiteDatabase db;
-    private EquiposSQLiteHelper usdbh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +41,9 @@ public class ModifyActivity extends AppCompatActivity {
         //Construimos el mensaje a mostrar
         final int posicion =  bundleB.getInt("valor");
 
-
-
         //////////////////////////////////boton modificar/////////////////////////////////////////
         btnModificar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
                 //Recuperamos los valores de los campos de texto
                 String mod = txtModelo.getText().toString();
                 String mar = txtMarca.getText().toString();
@@ -60,36 +53,32 @@ public class ModifyActivity extends AppCompatActivity {
                 txtPotencia.setText("");
                 txtDescripcion.setText("");
                 txtMarca.setText("");
-
                 //////////////////////////////////////////
-
                 if (db != null) {
                     String[] campos = new String[] {"id", "modelo", "marca","potencia", "descripcion"};
                     Cursor c = db.query("Equipos", campos, null, null, null, null, null);
 
-
                     if (c.moveToFirst()) {
                         //Recorremos el cursor hasta que no haya más registros
 
-                        int i = 0;
+                        //int i = 0;
                         do {
-                            if (i == posicion) {
+                            if (c.getPosition() == posicion) {
 
                                 ContentValues nuevoRegistro = new ContentValues();
                                 nuevoRegistro.put("modelo", mod);
                                 nuevoRegistro.put("marca", mar);
                                 nuevoRegistro.put("potencia", pot);
                                 nuevoRegistro.put("descripcion", des);
-                                i++;
-                                db.update("Equipos", nuevoRegistro, "id=" + i, null);
-                                Toast.makeText(ModifyActivity.this,"Elemento MODIFICADO -> " + i,Toast.LENGTH_LONG).show();
+                           //     i++;
+                                db.update("Equipos", nuevoRegistro, "id=" + c.getInt(0), null);
+                                Toast.makeText(ModifyActivity.this,"Elemento MODIFICADO -> " + c.getInt(0),Toast.LENGTH_LONG).show();
                             }
-                            i++;
+                            //i++;
                         } while (c.moveToNext());
 
                     }
                 }
-
 
                 Intent i = new Intent(ModifyActivity.this, MainActivity.class);
                 startActivity(i);

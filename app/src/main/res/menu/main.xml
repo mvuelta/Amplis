@@ -24,10 +24,10 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_buscar"
-        android:orderInCategory="100"
-        android:title="Buscar"
+        android:id="@+id/action_consultar"
         android:icon="@drawable/ic_buscar"
+        android:orderInCategory="100"
+        android:title="Consultar"
         app:showAsAction="never" />
 
 

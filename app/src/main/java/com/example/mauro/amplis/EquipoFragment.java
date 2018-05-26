@@ -45,15 +45,12 @@ public class EquipoFragment extends Fragment {
     public void onActivityCreated(Bundle state) {
         super.onActivityCreated(state);
 
-
         tModelo = (TextView) getView().findViewById(R.id.tModelo);
         tMarca = (TextView) getView().findViewById(R.id.tBrand);
         iLogo = (ImageView) getView().findViewById(R.id.iLogo);
 
-
         SharedPreferences prefs = this.getActivity().getSharedPreferences("MisPreferencias", Context.MODE_PRIVATE);
         int posicion = prefs.getInt("posicion", -1);
-
 
         //Abrimos la base de datos 'DBEquipos' en modo escritura
         final EquiposSQLiteHelper usdbh = new EquiposSQLiteHelper(this.getActivity(), "DBEquipos", null, 1);
@@ -73,7 +70,6 @@ public class EquipoFragment extends Fragment {
                     k++;
                 } while (c.moveToNext());
             }
-
         }
 
 

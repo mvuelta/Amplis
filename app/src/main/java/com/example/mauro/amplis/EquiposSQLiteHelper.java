@@ -5,11 +5,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class EquiposSQLiteHelper extends SQLiteOpenHelper {
-
-
-
     //Sentencia SQL para crear la tabla de Equipos
     String sqlCreate = "CREATE TABLE Equipos (id TEXT, modelo TEXT, marca TEXT, potencia INTEGER, descripcion TEXT)";
+
+    String sqlCreateU = "CREATE TABLE Usuarios (user TEXT)";
 
     public EquiposSQLiteHelper (Context contexto, String nombre, SQLiteDatabase.CursorFactory factory, int version) {
         super(contexto, nombre, factory, version);
@@ -19,6 +18,7 @@ public class EquiposSQLiteHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         //Se ejecuta la sentencia SQL de creación de la tabla
         db.execSQL(sqlCreate);
+        db.execSQL(sqlCreateU);
     }
 
     @Override
@@ -30,8 +30,10 @@ public class EquiposSQLiteHelper extends SQLiteOpenHelper {
 
         //Se elimina la versión anterior de la tabla
         db.execSQL("DROP TABLE IF EXISTS Equipos");
+        db.execSQL("DROP TABLE IF EXISTS Usuarios");
 
         //Se crea la nueva versión de la tabla
         db.execSQL(sqlCreate);
+        db.execSQL(sqlCreateU);
     }
 }

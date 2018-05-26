@@ -22,9 +22,9 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-// Definimos la orientación de la SplashScreen como Portrait (vertical)
+        // Definimos la orientación de la SplashScreen como Portrait (vertical)
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-// Escondemos el título de la app
+        // Escondemos el título de la app
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_splash);
 
@@ -33,15 +33,15 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run()
             {
-// Start the next activity
-                Intent sesionIntent = new Intent().setClass(SplashActivity.this, SesionActivity.class);
-                startActivity(sesionIntent);
-// Terminamos la activity para que el usuario no pueda volver para atrás con el botón de back
+        // Start the next activity
+        Intent sesionIntent = new Intent().setClass(SplashActivity.this, SesionActivity.class);
+        startActivity(sesionIntent);
+        // Terminamos la activity para que el usuario no pueda volver para atrás con el botón de back
                 finish();
             }
         };
 
-// Simulamos con un timer un tiempo de espera definido en una constante al comienzo
+        // Simulamos con un timer un tiempo de espera definido en una constante al comienzo
         Timer timer = new Timer();
         timer.schedule(task, SPLASH_SCREEN_DELAY);
     }

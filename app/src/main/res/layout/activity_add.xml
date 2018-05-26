@@ -24,7 +24,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <EditText
+    <TextView
         android:id="@+id/txtMarca"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
